@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="alert alert-warning center" role="alert">
+  <h2>You request has been in progress, Please come back later</h2>
+</div>
+<br>
+
+<div class="container">
+<h2>Submitted details</h2>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Fields</th>
+      <th scope="col">Your details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>First Name </td>
+      <td>{{object.first_name}}</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Last Name </td>
+      <td>{{object.last_name}}</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Gender</td>
+      <td>{{object.gender}}</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Nationality</td>
+      <td>{{object.nationality}}</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>City</td>
+      <td>{{object.city}}</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>Country</td>
+      <td>{{object.country}}</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>State</td>
+      <td>{{object.state}}</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>Zip Code </td>
+      <td>{{object.zip_code}}</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>Home Address </td>
+      <td>{{object.user_address}}</td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>Shop Title</td>
+      <td>{{object.shop_title}}</td>
+    </tr>
+    <tr>
+      <th scope="row">11</th>
+      <td>ShopCatagory</td>
+      <td>{{object.shop_category}}</td>
+    </tr>
+    <tr>
+      <th scope="row">12</th>
+      <td>Shop Address</td>
+      <td>{{object.shop_address}}</td>
+    </tr>
+  </tbody>
+</table>
+    <a href="{% url 'shoprequests:shop_form_update' pk=object.pk %}" class="btn btn-success">Update</a>
+
+</div>
+{% endblock content %}

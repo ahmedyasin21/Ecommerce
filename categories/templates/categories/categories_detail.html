@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+{% for shop in shoplist %}
+
+<a href="{%url 'shops:shop_profile' slug=shop.slug %}">{{shop.title}}</a>
+<br>
+
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+  {% block content %}
+
+
+
+{% if query%}
+<p style='text-align:center;margin-top:20px'>
+result for <b> {{query}}</b>
+</p>
+<hr>
+{% comment %} {% else %}
+<form method='GET' action="{%url 'search:query'%}"> 
+<input style='margin-left:800px' type='text' placeholder = 'search' name='q' value={{request.GET.q}}>
+<button class='btn btn-success' type='submit' style='margin-left:px'>search</button>
+</form> {% endcomment %}
+{% endif %}
+<div class='container'>
+<div class='row'>
+{% for obj in lookups %}
+<div class='col'>
+<div class="card" style="width: 18rem;">
+{% if obj.image_one %}
+  <img src="{{obj.image_one.url}}" class="card-img-top" alt="No image">
+{% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{forloop.counter}}.{{obj.title}}</h5>
+    <p class="card-text">{{obj.description}}</p>
+    <a href="{%url 'products:product_detail' obj.slug %}" class="btn btn-primary">View</a>
+  </div>
+ 
+</div>
+</div>
+<hr>
+{% endfor %}
+</div>
+</div>
+
+  
+    {% endblock content %}

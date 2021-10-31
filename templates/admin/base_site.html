@@ -1,0 +1,15 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+{% block branding %}
+{% block extrastyle %}
+  <link rel='stylesheet' href="{% static 'css/admin.css' %}">
+  <style>
+    #header{
+  background: #606060;
+}
+  </style>
+{% endblock %}
+{% comment %} put them inside the H1 tag  {% endcomment %}
+{% comment %} <img src="{% static 'img/logo.png' %}" alt="" class="brand_img" height="50" width="80"> {% endcomment %}
+  <a class="nav-link" href="{% url 'admin:index' %}"><h1 = 'head'>Ecommerce</h1></a>
+{% endblock %}

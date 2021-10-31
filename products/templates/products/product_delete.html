@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user == object.product_owner.shop_owner %}
+<form method="post">
+<div class='container' style='padding-right: 15px;
+    padding-left: 175px;
+    margin-right: auto;
+    margin-left: auto;'>
+    {% csrf_token %}
+    <h2>Are you sure you want to delete <b>"{{object}}"</b></h2>
+    <img class="card-img-top" src="{{object.image_one.url}}" alt="Card image cap" height="300px" width="300px">
+
+    <input type="submit" class="btn btn-danger" value="Confirm">
+</div>
+</form>
+{% endif %}
+{% endblock  %}

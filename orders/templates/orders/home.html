@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Order Summary </h1>
+
+{% if order.products.exists %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">quantity</th>
+      <th scope="col">single piece price</th>
+      <th scope="col">total piece Price</th>
+      <th>discount</th>
+      <th scope="col">Saved money</th>
+      <th scope="col">Final ammount</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for cart in order.products.all %}
+    <tr>
+      <th scope="row">{{ forloop.counter}}</th>
+      <td><a href="{{cart.product.get_absolute_url}}">{{ cart.product.title }}</a>
+      {% comment %} {% include 'products/snippets/update_order.html' with product=product order=order %}{% endcomment %}
+      </td>
+      <td scope="col"> <a href={% url 'products:remove_single_item_from_cart' slug=cart.product.slug %}><i class="fa fa-minus mr-2" aria-hidden="true"></i></a>
+      {{cart.quantity}}<a href={% url 'products:add_to_cart' slug=cart.product.slug %}><i class="fa fa-plus ml-2" aria-hidden="true"></i></a>
+      </td>
+     
+
+      <td>{{ cart.product.price }}</td>
+      <td>${{ cart.get_total_item_price}}</td>
+      {% if cart.product.discount_price %}
+      <td>${{ cart.get_total_discount_item_price}}</td>
+      <td>${{ cart.get_final_price}}</td>
+      <td>${{ cart.get_amount_saved}}</td>
+      {% else %}
+      <td>$0.00</td>
+      <td>$0.00</td>
+      <td>${{ cart.get_final_price}}</td>
+      {% endif %}
+       <td>${{ cart.get_final_price}}</td>
+      <th scope="col"><a href={% url 'products:remove_from_cart' slug=cart.product.slug %}><i class="fa fa-trash" aria-hidden="true"></i>
+</a></th>
+    </tr>
+    {% endfor %}
+    <tr>
+      <th colspan='6'></th>
+      <td><b>Subtotal</b> {{ order.subtotal }}</td>
+    </tr>
+    {% if order.coupon %}
+    <tr>
+      <th colspan='6'></th>
+      <td><b>coupon </b> -${{ order.coupon.amount}}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <th colspan='6'></th>
+      <td><b>total</b> {{ order.get_total }}</td>
+    </tr>
+    <tr>
+      <th colspan='2'></th>
+      {% comment %} <td><a class='btn btn-success' href={%url 'orders:checkout'%}>Check out</a></td> {% endcomment %}
+    </tr>
+    {% if order.get_total %}
+        <tr>
+            <td colspan="8">
+            <a class='btn btn-warning float-right ml-2' href='/checkouts/checkout/'>Proceed to checkout</a>
+            <a class='btn btn-primary float-right' href='/products/list'>Continue shopping</a>
+            </td>
+        </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% else %}
+Cart is empty
+{% endif %}
+{% endblock content %}

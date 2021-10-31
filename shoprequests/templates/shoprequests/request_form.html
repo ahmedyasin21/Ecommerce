@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block content %}
+<div class="container">
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {% bootstrap_field form.first_name %}
+    {% bootstrap_field form.last_name %}
+    {% bootstrap_field form.age %}
+    {% bootstrap_field form.gender %}
+    {% bootstrap_field form.nationality %}
+    {% bootstrap_field form.city %}
+    {% bootstrap_field form.country %}
+    {% bootstrap_field form.state %}
+    {% bootstrap_field form.zip_code %}
+    {% bootstrap_field form.user_address %}
+    {% bootstrap_field form.shop_title %}
+    {% bootstrap_field form.shop_category %}
+    {% bootstrap_field form.shop_address %}
+    <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+    </form>
+</div>
+
+{% endblock content %}
+
+
+

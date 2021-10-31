@@ -1,0 +1,50 @@
+
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="card mb-3 container">
+<h3>Product Owner: <a href="{% url 'shops:shop_profile' slug=object.product_owner.slug %}">{{object.product_owner}}</h3></a>
+  <img class="card-img-top" src="{{object.image_one.url}}" alt="Card image cap" style="height:600px;width:auto;">
+  <div class="card-body">
+    <h5 class="card-title">{{object.title}}</h5>
+    <p class="card-text">{{object.description}}</p>
+    <p class="card-text"><small class="text-muted">{{object.create_date|timesince}}</small></p>
+
+    {% if user == object.product_owner.shop_owner %}
+    <a href="{% url 'products:product_delete' slug=object.slug %}" class="btn btn-denger">Delete</a>
+    <a href="{% url 'products:product_update' slug=object.slug %}" class="btn btn-success">Update</a>
+    {% endif %}
+  </div>
+  <br>
+  <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+              Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+    </a>
+   <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
+              Remove from cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+    </a>
+  <hr>
+</div>
+
+
+{% comment %} <div class='container' style ='margin-top:20px ;'>
+<h1 style='text-align:center'>{{ products.title }}</h1>
+<p style='text-align:center;font-weight: normal;'><small >created: {{ products.create_date|date:'d-M-Y :P'  }}</small></p>
+</div><hr style="width: 80%;">
+<div class='container' style ='padding-right: 15px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;'>
+<div class='row'>
+<div class='col'>
+  
+<h4 style=' text-align:center;font-weight: normal; '>{{ products.description|linebreaks }}</h4>
+</div>
+</div>
+<a href="{% url 'products:product_delete' slug=products.slug %}"> <button class="btn btn-#ccb852 pull-right" >Delete</button></a>
+</div>
+</div>
+<a href="{% url 'products:product_update' slug=products.slug %}"> <button class="btn btn-success pull-right" >Update</button></a>
+</div> {% endcomment %}
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<div class="page-content">
+
+{% for message in messages %}
+    {% if message %}
+            <div class="alert alert-danger container" style="textalign:center">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    ×</button>
+               {% comment %} <span class="glyphicon glyphicon-cross"></span> <strong>You're successfully registered</strong> {% endcomment %}
+                {% comment %} <hr class="message-inner-separator"> {% endcomment %}
+                <p>{{message}}</p>
+            </div>
+    {% endif %}
+    {% endfor %}
+<br><br>
+ <img src="{{request.user.userprofile.avatar.url}}" class="img-resonsive img-circle" alt="..."></span>
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary btn-block btn-flat">Save</button>
+    </form>
+</div>
+
+{% endblock content %}

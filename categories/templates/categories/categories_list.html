@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+{% for category in object_list %}
+
+<a href="{%url 'categories:categories_detail' slug=category.slug %}">{{category.name}}</a>
+<br>
+
+{% endfor %}
+{% endblock content %}

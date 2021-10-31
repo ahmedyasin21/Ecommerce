@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_staff %}
+<a href="{% url 'products:product' %}" class="btn btn-warning">New</a>
+{% endif %}
+<div class='row'>
+{% for product in products %}
+<div class="card col-4" style="width: 18rem;margin-top:20px;">
+
+  <img class="card-img-top" src="{{product.image_one.url}}" alt="Card image cap" height="300px" width="300px">
+  <div class="card-body">
+    <h5 class="card-title">{{product.title}}</h5>
+    <p class="card-text">{{product.description}}</p>
+    {% if user == product.product_owner.shop_owner %}
+    <a href="{% url 'products:product_delete' slug=product.slug %}" class="btn btn-denger">Delete</a>
+    <a href="{% url 'products:product_update' slug=product.slug %}" class="btn btn-success">Update</a>
+    {% endif %}
+    <a href="{% url 'products:product_detail' slug=product.slug %}" class="btn btn-primary">View</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+{% comment %} <div class="container">
+  <div class="row">
+    {% for product in products %}
+    
+    <div class="col-4">
+                <div class="rotate-1 lazur-bg" style='margin-left:80px'>
+                    <small>{{ product.create_date|date:'d-M-Y :P'  }}</small>
+                    {{forloop.counter}}
+                    <h4>{{ product.title }}</h4>  
+                    <hr>
+                    <p>{{ product.description|truncatechars:20|linebreaks}}<hr></p>
+                   <a href="{% url 'products:product_delete' slug=product.slug %}" class="text-danger pull-right"><i class="fa fa-trash-o " style='color:black'></i></a>
+                    <a href="{% url 'products:product_detail' slug=product.slug %}" class="text-danger pull-right"><i class="fa fa-fw fa-envelope" style='color:black'></i></a>
+                    <a href="{% url 'products:product_update' slug=product.slug %}" class="text-danger pull-right"><i class="fa fa-fw fa-pencil" style='color:black'></i></a>
+                </div>
+	</div>
+    {% endfor %} {% endcomment %}
+    {% comment %} </div>
+      {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class ='btn btn-warning'href='?page=1'>first</a>
+            <a class ='btn btn-warning'href="?page={{page_obj.previous_page_number}}">Previous</a>   
+        {% endif %}
+        
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num  %}
+                <a class ='btn btn-warning'href="?page={{num}}">{{num}}</a>
+            {% elif num > page_obj.number|add:'-1' and num < page_obj.number|add:'1' %}
+                <a class ='btn btn-success'href="?page={{num}}">{{num}}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class ='btn btn-warning'href="?page={{page_obj.next_page_number}}">Next</a>
+            <a class ='btn btn-warning'href="?page={{page_obj.paginator.num_pages}}">Last</a>   
+        {% endif %}
+    {% endif %}
+</div> {% endcomment %}
+
+{% endblock content %}

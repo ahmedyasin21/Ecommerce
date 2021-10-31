@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+
+    {% if user == object.shop_owner %}
+    <a href="{% url 'shops:shop_profile_update' slug=object.slug %}" class="btn btn-success">Update</a>
+    {% endif %}
+    <img src="{{object.shop_bg.url }}" class="img-fluid" alt="Responsive image" style="margin-left: 150px;margin-right: auto;">
+
+
+    <div style="text-align:center">
+        <h3>Shop Title : {{object.title}}</h3>
+        <h4>Shop Address : {{object.shop_address}}</h4>
+        <span> <p>Customers : {{object.customers.count}}</p><p>Favorite Customers : {{object.customers_favorite.count}}</p></span>
+        <p>products : {{products_count}}</p>
+    </dir>
+</div>
+{% endblock content %}
